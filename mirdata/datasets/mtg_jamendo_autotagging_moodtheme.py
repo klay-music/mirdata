@@ -182,11 +182,11 @@ class Dataset(core.Dataset):
     The MTG jamendo autotagging moodtheme dataset
     """
 
-    def __init__(self, data_home=None, version="default"):
+    def __init__(self, data_home=None, label_type="autotagging_moodtheme", version="default"):
         super().__init__(
             data_home,
             version,
-            name="mtg_jamendo_autotagging_moodtheme",
+            label_type,
             track_class=Track,
             bibtex=BIBTEX,
             download_info=DOWNLOAD_INFO,
@@ -195,11 +195,13 @@ class Dataset(core.Dataset):
             license_info=(
                 "Creative Commons Attribution NonCommercial Share Alike 4.0 International."
             ),
-        )
+        ) # name="mtg_jamendo_autotagging_moodtheme",
+    
+        self.label_type = label_type
 
     @core.cached_property
     def _metadata(self):
-        meta_path = os.path.join(self.data_home, "data/autotagging_moodtheme.tsv")
+        meta_path = os.path.join(self.data_home, "data/" + self.label_type + ".tsv")
 
         try:
             with open(meta_path, "r") as fhandle:
@@ -219,7 +221,7 @@ class Dataset(core.Dataset):
                 "data",
                 "splits",
                 f"split-{split_number}",
-                "autotagging_moodtheme-train.tsv",
+                self.label_type + "-train.tsv",
             )
             with open(path_train, "r") as fhandle:
                 reader = csv.reader(fhandle, delimiter="\t")
@@ -230,7 +232,7 @@ class Dataset(core.Dataset):
                 "data",
                 "splits",
                 f"split-{split_number}",
-                "autotagging_moodtheme-validation.tsv",
+                self.label_type + "-validation.tsv",
             )
             with open(path_validation, "r") as fhandle:
                 reader = csv.reader(fhandle, delimiter="\t")
@@ -241,7 +243,7 @@ class Dataset(core.Dataset):
                 "data",
                 "splits",
                 f"split-{split_number}",
-                "autotagging_moodtheme-test.tsv",
+                self.label_type + "-test.tsv",
             )
             with open(path_test, "r") as fhandle:
                 reader = csv.reader(fhandle, delimiter="\t")
@@ -252,10 +254,10 @@ class Dataset(core.Dataset):
         meta["splits"] = splits
         return meta
 
-    @deprecated(
+    '''@deprecated(
         reason="Use mirdata.datasets.mtg_jamendo_autotagging_moodtheme.load_audio",
         version="0.3.4",
-    )
+    )'''
     def load_audio(self, *args, **kwargs):
         return load_audio(*args, **kwargs)
 
@@ -275,10 +277,10 @@ class Dataset(core.Dataset):
 
         return self._metadata["splits"][split_number]
 
-    @deprecated(
+    '''@deprecated(
         reason="Use mirdata.datasets.mtg_jamendo_autotagging_moodtheme.get_track_splits",
         version="0.3.6",
-    )
+    )'''
     def get_track_ids_for_split(self, split_number):
         """Load a MTG jamendo autotagging moodtheme pre-defined split. There are five different train/validation/tests splits.
         Args:
