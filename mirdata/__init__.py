@@ -22,7 +22,7 @@ def list_datasets():
     return DATASETS
 
 
-def initialize(dataset_name, data_home=None, version="default"):
+def initialize(dataset_name, data_home=None, label_type=None, version="default"):
     """Load a mirdata dataset by name
 
     Example:
@@ -52,4 +52,4 @@ def initialize(dataset_name, data_home=None, version="default"):
 
     module = importlib.import_module("mirdata.datasets.{}".format(dataset_name))
 
-    return module.Dataset(data_home=data_home, version=version)
+    return module.Dataset(data_home=data_home, label_type=label_type, version=version)
