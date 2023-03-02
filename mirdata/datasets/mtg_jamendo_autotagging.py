@@ -54,11 +54,11 @@ BIBTEX = """@conference {bogdanov2019mtg,
     address = "Long Beach, CA, United States",
     url = "http://hdl.handle.net/10230/42015"
 }"""
-'''INDEXES = {
+INDEXES = {
     "default": "1.0",
     "test": "1.0",
     "1.0": core.Index(filename="mtg_jamendo_autotagging_moodtheme_index_1.0.json"),
-}'''
+}
 DOWNLOAD_INFO = """
     The audio files can be downloaded following the path described in https://github.com/MTG/mtg-jamendo-dataset#downloading-the-data
     
@@ -107,12 +107,14 @@ class Track(core.Track):
         track_id,
         data_home,
         dataset_name,
+        index,
         metadata,
     ):
         super().__init__(
             track_id,
             data_home,
             dataset_name,
+            index,
             metadata,
         )
 
@@ -188,11 +190,12 @@ class Dataset(core.Dataset):
             track_class=Track,
             bibtex=BIBTEX,
             download_info=DOWNLOAD_INFO,
+            indexes=INDEXES,
             remotes=REMOTES,
             license_info=(
                 "Creative Commons Attribution NonCommercial Share Alike 4.0 International."
             ),
-        )
+        ) # name="mtg_jamendo_autotagging_moodtheme",
     
         self.label_type = label_type
 
