@@ -182,20 +182,20 @@ class Dataset(core.Dataset):
     The MTG jamendo autotagging moodtheme dataset
     """
 
-    def __init__(self, data_home=None, label_type="autotagging_moodtheme", version="default"):
+    def __init__(self, data_home=None, label_type="autotagging_moodtheme", indexes=INDEXES, version="default"):
         super().__init__(
             data_home,
             version,
             label_type,
+            indexes,
             track_class=Track,
             bibtex=BIBTEX,
             download_info=DOWNLOAD_INFO,
-            indexes=INDEXES,
             remotes=REMOTES,
             license_info=(
                 "Creative Commons Attribution NonCommercial Share Alike 4.0 International."
             ),
-        ) # name="mtg_jamendo_autotagging_moodtheme",
+        )
     
         self.label_type = label_type
 
