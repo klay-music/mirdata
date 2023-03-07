@@ -185,9 +185,10 @@ class Dataset(core.Dataset):
     def __init__(self, data_home=None, label_type="autotagging_moodtheme", indexes=INDEXES, version="default"):
         super().__init__(
             data_home,
-            version,
             label_type,
             indexes,
+            version,
+            name="mtg_jamendo_autotagging",
             track_class=Track,
             bibtex=BIBTEX,
             download_info=DOWNLOAD_INFO,
